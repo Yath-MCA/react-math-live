@@ -103,3 +103,16 @@
     }
   }
   
+
+  .latex-output {
+    width: 100%;
+    min-height: 70px;
+    padding: 6px;
+    font-family: monospace;
+    font-size: 13px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    background: #f9fafb;
+    resize: vertical;
+  }
+  

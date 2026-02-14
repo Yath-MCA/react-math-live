@@ -96,14 +96,21 @@ export default function FullImpactDashboard() {
   }
 
   function updateAll(latex) {
+    // Update mode preview
     if (currentPreviewRef.current)
       currentPreviewRef.current.value = latex;
-
-    if (currentOutputRef.current)
-      currentOutputRef.current.value = latex;
-
+  
+    // Fresh mode preview
     recreateFreshInstances(latex);
+  
+    // Output raw LaTeX
+    if (currentLatexRef.current)
+      currentLatexRef.current.value = currentPreviewRef.current.value;
+  
+    if (futureLatexRef.current)
+      futureLatexRef.current.value = latex;
   }
+  
 
   function handleInput() {
     const latex = inputRef.current.value;
@@ -180,20 +187,30 @@ export default function FullImpactDashboard() {
         </div>
       </div>
 
-      {/* Output */}
-      <div className="section">
-        <div className="grid">
-          <div className="panel">
-            <h5>Future Output (Fresh)</h5>
-            <div ref={futureOutputContainer} />
-          </div>
+      {/* Output Comparison */}
+<div className="section">
+  <h4>Output Comparison (Raw LaTeX)</h4>
+  <div className="grid">
+    <div className="panel">
+      <h5>Future Output (Fresh)</h5>
+      <textarea
+        ref={futureLatexRef}
+        readOnly
+        className="latex-output"
+      />
+    </div>
 
-          <div className="panel">
-            <h5>Current Output (Update)</h5>
-            <div ref={currentOutputContainer} />
-          </div>
-        </div>
-      </div>
+    <div className="panel">
+      <h5>Current Output (Update)</h5>
+      <textarea
+        ref={currentLatexRef}
+        readOnly
+        className="latex-output"
+      />
+    </div>
+  </div>
+</div>
+
     </div>
   );
 }
